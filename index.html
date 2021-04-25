@@ -1,145 +1,618 @@
-<!DOCTYPE html>
-<html lang="en" >
-
+<!doctype html>
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>加载中</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载中...</title>
     <style>
-        *{margin:0;padding:0;list-style-type:none;}
-        body{overflow-x:hidden;}
+        article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}body{margin:0;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;margin:0.67em 0;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:bold;}dfn{font-style:italic;}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em;}pre{white-space:pre-wrap;}q{quotes:"\201C" "\201D" "\2018" "\2019";}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em;}sub{bottom:-0.25em;}img{border:0;}svg:not(:root){overflow:hidden;}figure{margin:0;}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em;}legend{border:0;padding:0;}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;}button,input{line-height:normal;}button,select{text-transform:none;}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;}button[disabled],html input[disabled]{cursor:default;}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}
+    </style>
+    <style>
 
-        html {
+        body, html { font-size: 100%; 	padding: 0; margin: 0;}
+
+        /* Reset */
+        *,
+        *:after,
+        *:before {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
 
-        *, *::after, *::before {
-            box-sizing: inherit;
+        /* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+        .clearfix:before,
+        .clearfix:after {
+            content: " ";
+            display: table;
         }
 
-        *, *:before, *:after {
-            box-sizing: border-box;
-            outline: none;
+        .clearfix:after {
+            clear: both;
         }
 
-        html {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 16px;
-            font-smooth: auto;
-            font-weight: 300;
-            line-height: 1.5;
-            color: #444;
+        body{
+            background: #f9f7f6;
+            color: #404d5b;
+            font-weight: 500;
+            font-size: 1.05em;
+            font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+        }
+        a{color: #2fa0ec;text-decoration: none;outline: none;}
+        a:hover,a:focus{color:#74777b;}
+
+        .htmleaf-container{
+            margin: 0 auto;
+            text-align: center;
+            overflow: hidden;
+        }
+    </style>
+    <style>
+        html, body {
+            height: 100%;
         }
 
         body {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100vh;
-            background-color: #20293a;
+            /* autoprefixer: off */
+            background: #3c3b52;
+            background-image: -webkit-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+            background-image: -moz-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+            background-image: -o-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+            background-image: radial-gradient(circle cover at top, #3c3b52 0%, #252233 80%);
+            /* autoprefixer: on */
         }
 
-        div {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 300px;
-            height: 300px;
-            background-color: #20293a;
-            color: #20293a;
-            border-radius: 50%;
-            font-weight: bold;
-            line-height: 1.5;
+        .barPie--radio {
+            margin: 20px;
+            width: 400px;
+            height: 400px;
             text-align: center;
-            animation: text 10s ease infinite;
-        }
-        div:after {
+            font: 700 50px 'Open Sans Condensed', sans-serif;
             position: absolute;
-            content: "";
-            top: -5%;
-            left: -5%;
+            top: 0;
+            left: 0;
+            bottom: 0;
             right: 0;
-            z-index: -1;
-            height: 100%;
+            margin: auto;
+        }
+
+        .barPie {
+            -webkit-perspective: 1000px;
+            perspective: 1000px;
+        }
+        .barPie__value {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            /* align horizontal */
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            /* align vertical */
+            width: 50%;
+            height: 50%;
+            margin: auto;
+            position: relative;
+            top: 50%;
+            margin-top: -25%;
+            z-index: 1;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.5em;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.5), 0 2px rgba(0, 0, 0, 0.4), 0 3px 1px rgba(0, 0, 0, 0.2);
+        }
+        .barPie__value::after {
+            content: '%';
+            display: inline-block;
+            opacity: .3;
+            font-size: .5em;
+            margin-left: .1em;
+        }
+        .barPie__ring {
             width: 100%;
-            margin: 0 auto;
-            transform: scale(0.85);
-            filter: blur(5vw);
-            background: linear-gradient(270deg, #00fcbd, #7400f9);
-            background-size: 150% 150%;
-            border-radius: 50%;
-            animation: glowmation 10s linear infinite;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
         }
-        @keyframes glowmation {
-            0% {
-                top: -3%;
-                left: -3%;
-                background-position: 0% 50%;
-                background-size: 150% 150%;
-            }
-            12.5% {
-                top: -3%;
-                left: 0;
-                background-size: 70% 30%;
-            }
-            25% {
-                top: -3%;
-                left: 3%;
-                background-size: 100% 50%;
-            }
-            37.5% {
-                top: 0;
-                left: 3%;
-                background-size: 70% 30%;
-            }
-            50% {
-                top: 3%;
-                left: 3%;
-                background-position: 100% 50%;
-                background-size: 30% 30%;
-            }
-            62.5% {
-                top: 3%;
-                left: 0;
-                background-size: 30% 70%;
-            }
-            75% {
-                top: 3%;
-                left: -3%;
-                background-size: 50% 100%;
-            }
-            87.5% {
-                top: 0;
-                left: -3%;
-                background-size: 30% 70%;
-            }
-            100% {
-                top: -3%;
-                left: -3%;
-                background-position: 0% 50%;
-                background-size: 150% 150%;
-            }
+        .barPie__ring label {
+            cursor: pointer;
         }
-        @keyframes text {
-            0% {
-                color: #7400f9;
-            }
-            50% {
-                color: #00fcbd;
-            }
-            100% {
-                color: #7400f9;
-            }
+        .barPie__ring__item {
+            position: absolute;
+            width: 34px;
+            height: 50%;
+            top: 0;
+            left: 50%;
+            margin-left: -17px;
+            -webkit-transform-origin: 50% 100%;
+            -ms-transform-origin: 50% 100%;
+            transform-origin: 50% 100%;
+            -webkit-transition: .1s;
+            transition: .1s;
+        }
+        .barPie__ring__item::before {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 30%;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 4px rgba(0, 0, 0, 0.33) inset;
+            -webkit-transition: .3s;
+            transition: .3s;
+        }
+        .barPie__ring__item:hover::before {
+            opacity: .7;
+        }
+        .barPie__ring__item:hover::before,
+        .barPie__ring__item:hover ~ .barPie__ring__item::before {
+            background: rgba(255, 255, 255, 0.4);
+            -webkit-transition: 0s !important;
+            transition: 0s !important;
+        }
+        .barPie__ring__item:nth-of-type(1) {
+            -webkit-transform: rotate(11.25deg);
+            -ms-transform: rotate(11.25deg);
+            transform: rotate(11.25deg);
+        }
+        .barPie__ring__item:nth-of-type(1)::before {
+            -webkit-transition-delay: 12ms;
+            transition-delay: 12ms;
+        }
+        .barPie__ring__item:nth-of-type(2) {
+            -webkit-transform: rotate(22.5deg);
+            -ms-transform: rotate(22.5deg);
+            transform: rotate(22.5deg);
+        }
+        .barPie__ring__item:nth-of-type(2)::before {
+            -webkit-transition-delay: 24ms;
+            transition-delay: 24ms;
+        }
+        .barPie__ring__item:nth-of-type(3) {
+            -webkit-transform: rotate(33.75deg);
+            -ms-transform: rotate(33.75deg);
+            transform: rotate(33.75deg);
+        }
+        .barPie__ring__item:nth-of-type(3)::before {
+            -webkit-transition-delay: 36ms;
+            transition-delay: 36ms;
+        }
+        .barPie__ring__item:nth-of-type(4) {
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        .barPie__ring__item:nth-of-type(4)::before {
+            -webkit-transition-delay: 48ms;
+            transition-delay: 48ms;
+        }
+        .barPie__ring__item:nth-of-type(5) {
+            -webkit-transform: rotate(56.25deg);
+            -ms-transform: rotate(56.25deg);
+            transform: rotate(56.25deg);
+        }
+        .barPie__ring__item:nth-of-type(5)::before {
+            -webkit-transition-delay: 60ms;
+            transition-delay: 60ms;
+        }
+        .barPie__ring__item:nth-of-type(6) {
+            -webkit-transform: rotate(67.5deg);
+            -ms-transform: rotate(67.5deg);
+            transform: rotate(67.5deg);
+        }
+        .barPie__ring__item:nth-of-type(6)::before {
+            -webkit-transition-delay: 72ms;
+            transition-delay: 72ms;
+        }
+        .barPie__ring__item:nth-of-type(7) {
+            -webkit-transform: rotate(78.75deg);
+            -ms-transform: rotate(78.75deg);
+            transform: rotate(78.75deg);
+        }
+        .barPie__ring__item:nth-of-type(7)::before {
+            -webkit-transition-delay: 84ms;
+            transition-delay: 84ms;
+        }
+        .barPie__ring__item:nth-of-type(8) {
+            -webkit-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+        .barPie__ring__item:nth-of-type(8)::before {
+            -webkit-transition-delay: 96ms;
+            transition-delay: 96ms;
+        }
+        .barPie__ring__item:nth-of-type(9) {
+            -webkit-transform: rotate(101.25deg);
+            -ms-transform: rotate(101.25deg);
+            transform: rotate(101.25deg);
+        }
+        .barPie__ring__item:nth-of-type(9)::before {
+            -webkit-transition-delay: 108ms;
+            transition-delay: 108ms;
+        }
+        .barPie__ring__item:nth-of-type(10) {
+            -webkit-transform: rotate(112.5deg);
+            -ms-transform: rotate(112.5deg);
+            transform: rotate(112.5deg);
+        }
+        .barPie__ring__item:nth-of-type(10)::before {
+            -webkit-transition-delay: 120ms;
+            transition-delay: 120ms;
+        }
+        .barPie__ring__item:nth-of-type(11) {
+            -webkit-transform: rotate(123.75deg);
+            -ms-transform: rotate(123.75deg);
+            transform: rotate(123.75deg);
+        }
+        .barPie__ring__item:nth-of-type(11)::before {
+            -webkit-transition-delay: 132ms;
+            transition-delay: 132ms;
+        }
+        .barPie__ring__item:nth-of-type(12) {
+            -webkit-transform: rotate(135deg);
+            -ms-transform: rotate(135deg);
+            transform: rotate(135deg);
+        }
+        .barPie__ring__item:nth-of-type(12)::before {
+            -webkit-transition-delay: 144ms;
+            transition-delay: 144ms;
+        }
+        .barPie__ring__item:nth-of-type(13) {
+            -webkit-transform: rotate(146.25deg);
+            -ms-transform: rotate(146.25deg);
+            transform: rotate(146.25deg);
+        }
+        .barPie__ring__item:nth-of-type(13)::before {
+            -webkit-transition-delay: 156ms;
+            transition-delay: 156ms;
+        }
+        .barPie__ring__item:nth-of-type(14) {
+            -webkit-transform: rotate(157.5deg);
+            -ms-transform: rotate(157.5deg);
+            transform: rotate(157.5deg);
+        }
+        .barPie__ring__item:nth-of-type(14)::before {
+            -webkit-transition-delay: 168ms;
+            transition-delay: 168ms;
+        }
+        .barPie__ring__item:nth-of-type(15) {
+            -webkit-transform: rotate(168.75deg);
+            -ms-transform: rotate(168.75deg);
+            transform: rotate(168.75deg);
+        }
+        .barPie__ring__item:nth-of-type(15)::before {
+            -webkit-transition-delay: 180ms;
+            transition-delay: 180ms;
+        }
+        .barPie__ring__item:nth-of-type(16) {
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+        .barPie__ring__item:nth-of-type(16)::before {
+            -webkit-transition-delay: 192ms;
+            transition-delay: 192ms;
+        }
+        .barPie__ring__item:nth-of-type(17) {
+            -webkit-transform: rotate(191.25deg);
+            -ms-transform: rotate(191.25deg);
+            transform: rotate(191.25deg);
+        }
+        .barPie__ring__item:nth-of-type(17)::before {
+            -webkit-transition-delay: 204ms;
+            transition-delay: 204ms;
+        }
+        .barPie__ring__item:nth-of-type(18) {
+            -webkit-transform: rotate(202.5deg);
+            -ms-transform: rotate(202.5deg);
+            transform: rotate(202.5deg);
+        }
+        .barPie__ring__item:nth-of-type(18)::before {
+            -webkit-transition-delay: 216ms;
+            transition-delay: 216ms;
+        }
+        .barPie__ring__item:nth-of-type(19) {
+            -webkit-transform: rotate(213.75deg);
+            -ms-transform: rotate(213.75deg);
+            transform: rotate(213.75deg);
+        }
+        .barPie__ring__item:nth-of-type(19)::before {
+            -webkit-transition-delay: 228ms;
+            transition-delay: 228ms;
+        }
+        .barPie__ring__item:nth-of-type(20) {
+            -webkit-transform: rotate(225deg);
+            -ms-transform: rotate(225deg);
+            transform: rotate(225deg);
+        }
+        .barPie__ring__item:nth-of-type(20)::before {
+            -webkit-transition-delay: 240ms;
+            transition-delay: 240ms;
+        }
+        .barPie__ring__item:nth-of-type(21) {
+            -webkit-transform: rotate(236.25deg);
+            -ms-transform: rotate(236.25deg);
+            transform: rotate(236.25deg);
+        }
+        .barPie__ring__item:nth-of-type(21)::before {
+            -webkit-transition-delay: 252ms;
+            transition-delay: 252ms;
+        }
+        .barPie__ring__item:nth-of-type(22) {
+            -webkit-transform: rotate(247.5deg);
+            -ms-transform: rotate(247.5deg);
+            transform: rotate(247.5deg);
+        }
+        .barPie__ring__item:nth-of-type(22)::before {
+            -webkit-transition-delay: 264ms;
+            transition-delay: 264ms;
+        }
+        .barPie__ring__item:nth-of-type(23) {
+            -webkit-transform: rotate(258.75deg);
+            -ms-transform: rotate(258.75deg);
+            transform: rotate(258.75deg);
+        }
+        .barPie__ring__item:nth-of-type(23)::before {
+            -webkit-transition-delay: 276ms;
+            transition-delay: 276ms;
+        }
+        .barPie__ring__item:nth-of-type(24) {
+            -webkit-transform: rotate(270deg);
+            -ms-transform: rotate(270deg);
+            transform: rotate(270deg);
+        }
+        .barPie__ring__item:nth-of-type(24)::before {
+            -webkit-transition-delay: 288ms;
+            transition-delay: 288ms;
+        }
+        .barPie__ring__item:nth-of-type(25) {
+            -webkit-transform: rotate(281.25deg);
+            -ms-transform: rotate(281.25deg);
+            transform: rotate(281.25deg);
+        }
+        .barPie__ring__item:nth-of-type(25)::before {
+            -webkit-transition-delay: 300ms;
+            transition-delay: 300ms;
+        }
+        .barPie__ring__item:nth-of-type(26) {
+            -webkit-transform: rotate(292.5deg);
+            -ms-transform: rotate(292.5deg);
+            transform: rotate(292.5deg);
+        }
+        .barPie__ring__item:nth-of-type(26)::before {
+            -webkit-transition-delay: 312ms;
+            transition-delay: 312ms;
+        }
+        .barPie__ring__item:nth-of-type(27) {
+            -webkit-transform: rotate(303.75deg);
+            -ms-transform: rotate(303.75deg);
+            transform: rotate(303.75deg);
+        }
+        .barPie__ring__item:nth-of-type(27)::before {
+            -webkit-transition-delay: 324ms;
+            transition-delay: 324ms;
+        }
+        .barPie__ring__item:nth-of-type(28) {
+            -webkit-transform: rotate(315deg);
+            -ms-transform: rotate(315deg);
+            transform: rotate(315deg);
+        }
+        .barPie__ring__item:nth-of-type(28)::before {
+            -webkit-transition-delay: 336ms;
+            transition-delay: 336ms;
+        }
+        .barPie__ring__item:nth-of-type(29) {
+            -webkit-transform: rotate(326.25deg);
+            -ms-transform: rotate(326.25deg);
+            transform: rotate(326.25deg);
+        }
+        .barPie__ring__item:nth-of-type(29)::before {
+            -webkit-transition-delay: 348ms;
+            transition-delay: 348ms;
+        }
+        .barPie__ring__item:nth-of-type(30) {
+            -webkit-transform: rotate(337.5deg);
+            -ms-transform: rotate(337.5deg);
+            transform: rotate(337.5deg);
+        }
+        .barPie__ring__item:nth-of-type(30)::before {
+            -webkit-transition-delay: 360ms;
+            transition-delay: 360ms;
+        }
+        .barPie__ring__item:nth-of-type(31) {
+            -webkit-transform: rotate(348.75deg);
+            -ms-transform: rotate(348.75deg);
+            transform: rotate(348.75deg);
+        }
+        .barPie__ring__item:nth-of-type(31)::before {
+            -webkit-transition-delay: 372ms;
+            transition-delay: 372ms;
+        }
+        .barPie__ring__item:nth-of-type(32) {
+            -webkit-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+        .barPie__ring__item:nth-of-type(32)::before {
+            -webkit-transition-delay: 384ms;
+            transition-delay: 384ms;
+        }
+        .barPie__ring :checked ~ .barPie__ring__item::before {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+            -webkit-transition: 0s;
+            transition: 0s;
         }
     </style>
 </head>
-
 <body>
+<div class="htmleaf-container">
+    <div data-to-value='77' data-items-count='32' id="p1_barPie" class="barPie barPie--radio">
+        <span class="barPie__value">0</span>
+        <div class="barPie__ring">
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem31" value="100" hidden="hidden"/>
+            <label for="p1_barPieItem31" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem30" value="96.875" hidden="hidden"/>
+            <label for="p1_barPieItem30" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem29" value="93.75" hidden="hidden"/>
+            <label for="p1_barPieItem29" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem28" value="90.625" hidden="hidden"/>
+            <label for="p1_barPieItem28" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem27" value="87.5" hidden="hidden"/>
+            <label for="p1_barPieItem27" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem26" value="84.375" hidden="hidden"/>
+            <label for="p1_barPieItem26" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem25" value="81.25" hidden="hidden"/>
+            <label for="p1_barPieItem25" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem24" value="78.125" hidden="hidden"/>
+            <label for="p1_barPieItem24" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem23" value="75" hidden="hidden"/>
+            <label for="p1_barPieItem23" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem22" value="71.875" hidden="hidden"/>
+            <label for="p1_barPieItem22" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem21" value="68.75" hidden="hidden"/>
+            <label for="p1_barPieItem21" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem20" value="65.625" hidden="hidden"/>
+            <label for="p1_barPieItem20" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem19" value="62.5" hidden="hidden"/>
+            <label for="p1_barPieItem19" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem18" value="59.375" hidden="hidden"/>
+            <label for="p1_barPieItem18" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem17" value="56.25" hidden="hidden"/>
+            <label for="p1_barPieItem17" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem16" value="53.125" hidden="hidden"/>
+            <label for="p1_barPieItem16" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem15" value="50" hidden="hidden"/>
+            <label for="p1_barPieItem15" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem14" value="46.875" hidden="hidden"/>
+            <label for="p1_barPieItem14" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem13" value="43.75" hidden="hidden"/>
+            <label for="p1_barPieItem13" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem12" value="40.625" hidden="hidden"/>
+            <label for="p1_barPieItem12" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem11" value="37.5" hidden="hidden"/>
+            <label for="p1_barPieItem11" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem10" value="34.375" hidden="hidden"/>
+            <label for="p1_barPieItem10" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem9" value="31.25" hidden="hidden"/>
+            <label for="p1_barPieItem9" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem8" value="28.125" hidden="hidden"/>
+            <label for="p1_barPieItem8" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem7" value="25" hidden="hidden"/>
+            <label for="p1_barPieItem7" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem6" value="21.875" hidden="hidden"/>
+            <label for="p1_barPieItem6" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem5" value="18.75" hidden="hidden"/>
+            <label for="p1_barPieItem5" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem4" value="15.625" hidden="hidden"/>
+            <label for="p1_barPieItem4" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem3" value="12.5" hidden="hidden"/>
+            <label for="p1_barPieItem3" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem2" value="9.375" hidden="hidden"/>
+            <label for="p1_barPieItem2" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem1" value="6.25" hidden="hidden"/>
+            <label for="p1_barPieItem1" class="barPie__ring__item"></label>
+            <input type="radio" name="barPieRadioGroup" id="p1_barPieItem0" value="3.125" hidden="hidden"/>
+            <label for="p1_barPieItem0" class="barPie__ring__item"></label>
+        </div>
+    </div>
+</div>
 
-<div>LOADING...</div>
-
+<script src='js/stopExecutionOnTimeout.js?t=1'></script>
+<script src='js/do-in.js'></script>
+<script>
+    (function (ELEMENT) {
+        ELEMENT.matches = ELEMENT.matches || ELEMENT.mozMatchesSelector || ELEMENT.msMatchesSelector || ELEMENT.oMatchesSelector || ELEMENT.webkitMatchesSelector;
+        ELEMENT.closest = ELEMENT.closest || function closest(selector) {
+            var element = this;
+            while (element) {
+                if (window.CP.shouldStopExecution(1)) {
+                    break;
+                }
+                if (element.matches(selector))
+                    break;
+                element = element.parentElement;
+            }
+            window.CP.exitedLoop(1);
+            return element;
+        };
+    }(Element.prototype));
+    var barPie = {
+        onChnage: function (e) {
+            if (e.target.name != 'barPieRadioGroup')
+                return;
+            var scopeElm = e.target.closest('.barPie--radio');
+            barPie.update(scopeElm, +e.target.value);
+            if (!scopeElm.active)
+                scopeElm.querySelector('.barPie__ring').lastElementChild.addEventListener('click', barPie.clickToNull);
+            scopeElm.active = 1;
+        },
+        clickToNull: function () {
+            var that = this;
+            if (this.previousElementSibling.checked)
+                setTimeout(function () {
+                    that.previousElementSibling.checked = false;
+                    that.closest('.barPie--radio').querySelector('.barPie__value').innerHTML = '0';
+                }, 0);
+        },
+        update: function (scopeElm, value, speed, extraStep) {
+            if (!scopeElm)
+                return;
+            var valueElm = scopeElm.querySelector('.barPie__value'), inital = +valueElm.innerHTML, delta = value - inital, doin;
+            function step(t, elapsed) {
+                t = 1 - Math.exp(-t * 7);
+                var value = delta * t + inital, remainder = value % 1;
+                if (t > 0.99 && (remainder > 0.9 || remainder < 0.01)) {
+                    value = Math.round(value);
+                    doin.step = function () {
+                    };
+                } else
+                    value = value.toFixed(remainder ? 1 : 0);
+                valueElm.innerHTML = value;
+                if (extraStep)
+                    extraStep(t);
+            }
+            if (!valueElm.doin) {
+                doin = new Doin(step, speed || 0.33);
+                valueElm.doin = doin;
+            } else
+                doin = valueElm.doin;
+            doin.step = step;
+            doin.run();
+        }
+    };
+    document.addEventListener('change', barPie.onChnage);
+    var barPies = document.querySelectorAll('.barPie');
+    setTimeout(lazyCount, 1500);
+    function lazyCount() {
+        var currentBarPie, toValue, itemsCount;
+        function step(t) {
+            var itemIdx = Math.round(itemsCount * (toValue / 100) * t);
+            document.getElementById(currentBarPie.id + 'Item' + itemIdx).checked = true;
+        }
+        for (var i = barPies.length; i--;) {
+            if (window.CP.shouldStopExecution(2)) {
+                break;
+            }
+            currentBarPie = barPies[i];
+            toValue = currentBarPie.dataset.toValue;
+            if (toValue) {
+                itemsCount = currentBarPie.dataset.itemsCount;
+                barPie.update(currentBarPie, toValue, 1.5, step);
+            }
+        }
+        window.CP.exitedLoop(2);
+    }
+</script>
 </body>
 </html>
